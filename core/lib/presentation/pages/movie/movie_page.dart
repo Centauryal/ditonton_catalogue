@@ -1,6 +1,4 @@
 import 'package:core/core.dart';
-import 'package:core/presentation/pages/movie/popular_movies_page.dart';
-import 'package:core/presentation/pages/movie/top_rated_movies_page.dart';
 import 'package:core/presentation/provider/movie_list_notifier.dart';
 import 'package:core/presentation/widgets/movie_list.dart';
 import 'package:core/presentation/widgets/sub_heading_widget.dart';

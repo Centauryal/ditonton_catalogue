@@ -57,8 +57,8 @@ void init() {
     ),
   );
   locator.registerFactory(
-    () => MovieSearchNotifier(
-      searchMovies: locator(),
+    () => SearchBloc(
+      locator(),
     ),
   );
   locator.registerFactory(
@@ -92,8 +92,8 @@ void init() {
     ),
   );
   locator.registerFactory(
-    () => TvShowSearchNotifier(
-      searchTvShow: locator(),
+    () => SearchTvShowBloc(
+      locator(),
     ),
   );
   locator.registerFactory(
