@@ -27,8 +27,8 @@ import 'package:provider/provider.dart';
 import 'package:ditonton/injection.dart' as di;
 import 'package:search/search.dart';
 
-void main() {
-  di.init();
+void main() async {
+  await di.init();
   runApp(MyApp());
 }
 

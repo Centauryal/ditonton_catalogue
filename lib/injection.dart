@@ -32,13 +32,14 @@ import 'package:core/presentation/provider/tv_show_detail_notifier.dart';
 import 'package:core/presentation/provider/tv_show_list_notifier.dart';
 import 'package:core/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:core/presentation/provider/watchlist_tv_show_notifier.dart';
-import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
+import 'package:http/io_client.dart';
 import 'package:search/search.dart';
 
 final locator = GetIt.instance;
 
-void init() {
+Future init() async {
+  IOClient ioClient = await SSLPinning.ioClient;
   // provider
   locator.registerFactory(
     () => MovieListNotifier(
@@ -56,11 +57,7 @@ void init() {
       removeWatchlist: locator(),
     ),
   );
-  locator.registerFactory(
-    () => SearchBloc(
-      locator(),
-    ),
-  );
+  locator.registerFactory(() => SearchBloc(locator()));
   locator.registerFactory(
     () => PopularMoviesNotifier(
       locator(),
@@ -91,11 +88,7 @@ void init() {
       removeWatchlistTvShow: locator(),
     ),
   );
-  locator.registerFactory(
-    () => SearchTvShowBloc(
-      locator(),
-    ),
-  );
+  locator.registerFactory(() => SearchTvShowBloc(locator()));
   locator.registerFactory(
     () => PopularTvShowsNotifier(
       locator(),
@@ -145,7 +138,7 @@ void init() {
 
   // data sources
   locator.registerLazySingleton<MovieRemoteDataSource>(
-      () => MovieRemoteDataSourceImpl(client: locator()));
+      () => MovieRemoteDataSourceImpl(ioClient: locator()));
   locator.registerLazySingleton<MovieLocalDataSource>(
       () => MovieLocalDataSourceImpl(databaseHelper: locator()));
 
@@ -156,6 +149,6 @@ void init() {
   locator.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(locator()));
 
   // external
-  locator.registerLazySingleton(() => http.Client());
+  locator.registerLazySingleton(() => ioClient);
   locator.registerLazySingleton(() => DataConnectionChecker());
 }

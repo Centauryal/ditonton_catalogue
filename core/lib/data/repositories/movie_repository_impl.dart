@@ -33,11 +33,19 @@ class MovieRepositoryImpl implements MovieRepository {
         return Right(result.map((model) => model.toEntity()).toList());
       } on ServerException {
         return Left(ServerFailure(''));
+      } on SocketException {
+        return Left(ConnectionFailure('Failed to connect to the network'));
+      } on TlsException catch (e) {
+        return Left(ConnectionFailure('Certificate not valid ${e.message}'));
       }
     } else {
       try {
         final result = await localDataSource.getCachedNowPlayingMovies();
         return Right(result.map((model) => model.toEntity()).toList());
+      } on SocketException {
+        return Left(ConnectionFailure('Failed to connect to the network'));
+      } on TlsException catch (e) {
+        return Left(ConnectionFailure('Certificate not valid ${e.message}'));
       } on CacheException catch (e) {
         return Left(CacheFailure(e.message));
       }
@@ -53,6 +61,8 @@ class MovieRepositoryImpl implements MovieRepository {
       return Left(ServerFailure(''));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException catch (e) {
+      return Left(ConnectionFailure('Certificate not valid ${e.message}'));
     }
   }
 
@@ -65,6 +75,8 @@ class MovieRepositoryImpl implements MovieRepository {
       return Left(ServerFailure(''));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException catch (e) {
+      return Left(ConnectionFailure('Certificate not valid ${e.message}'));
     }
   }
 
@@ -77,6 +89,8 @@ class MovieRepositoryImpl implements MovieRepository {
       return Left(ServerFailure(''));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException catch (e) {
+      return Left(ConnectionFailure('Certificate not valid ${e.message}'));
     }
   }
 
@@ -89,6 +103,8 @@ class MovieRepositoryImpl implements MovieRepository {
       return Left(ServerFailure(''));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException catch (e) {
+      return Left(ConnectionFailure('Certificate not valid ${e.message}'));
     }
   }
 
@@ -101,6 +117,8 @@ class MovieRepositoryImpl implements MovieRepository {
       return Left(ServerFailure(''));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException catch (e) {
+      return Left(ConnectionFailure('Certificate not valid ${e.message}'));
     }
   }
 
@@ -113,7 +131,7 @@ class MovieRepositoryImpl implements MovieRepository {
     } on DatabaseException catch (e) {
       return Left(DatabaseFailure(e.message));
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 
@@ -149,6 +167,8 @@ class MovieRepositoryImpl implements MovieRepository {
       return Left(ServerFailure(''));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException catch (e) {
+      return Left(ConnectionFailure('Certificate not valid ${e.message}'));
     }
   }
 
@@ -161,6 +181,8 @@ class MovieRepositoryImpl implements MovieRepository {
       return Left(ServerFailure(''));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException catch (e) {
+      return Left(ConnectionFailure('Certificate not valid ${e.message}'));
     }
   }
 
@@ -173,6 +195,8 @@ class MovieRepositoryImpl implements MovieRepository {
       return Left(ServerFailure(''));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException catch (e) {
+      return Left(ConnectionFailure('Certificate not valid ${e.message}'));
     }
   }
 
@@ -185,6 +209,8 @@ class MovieRepositoryImpl implements MovieRepository {
       return Left(ServerFailure(''));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException catch (e) {
+      return Left(ConnectionFailure('Certificate not valid ${e.message}'));
     }
   }
 
@@ -197,6 +223,8 @@ class MovieRepositoryImpl implements MovieRepository {
       return Left(ServerFailure(''));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException catch (e) {
+      return Left(ConnectionFailure('Certificate not valid ${e.message}'));
     }
   }
 
@@ -209,6 +237,8 @@ class MovieRepositoryImpl implements MovieRepository {
       return Left(ServerFailure(''));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException catch (e) {
+      return Left(ConnectionFailure('Certificate not valid ${e.message}'));
     }
   }
 
@@ -222,7 +252,7 @@ class MovieRepositoryImpl implements MovieRepository {
     } on DatabaseException catch (e) {
       return Left(DatabaseFailure(e.message));
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 

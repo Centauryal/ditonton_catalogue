@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  equatable: ^2.0.2
+  equatable: ^2.0.3
   google_fonts: ^2.1.0
   data_connection_checker: 
     git:
@@ -20,7 +20,8 @@ dependencies:
   provider: ^6.0.2
   cached_network_image: ^3.1.0
   flutter_rating_bar: ^4.0.0
-  sqflite: ^2.0.0+3
+  sqflite_sqlcipher: ^2.1.0
+  encrypt: ^5.0.1
 
 dev_dependencies:
   flutter_test:
@@ -37,8 +38,7 @@ flutter:
 
   # To add assets to your package, add an assets section, like this:
   # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  #   - assets/
   #
   # For details regarding assets in packages, see
   # https://flutter.dev/assets-and-images/#from-packages
