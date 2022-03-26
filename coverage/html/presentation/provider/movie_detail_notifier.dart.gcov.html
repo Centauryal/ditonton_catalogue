@@ -3,63 +3,75 @@
 <html lang="en">
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - lcov.info - presentation/provider/movie_detail_notifier.dart</title>
-  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <title>LCOV - lcov.info - presentation/provider/movie_detail_notifier.dart</title>
+    <link href="../../gcov.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
 
-  <table width="100%" border=0 cellspacing=0 cellpadding=0>
-    <tr><td class="title">LCOV - code coverage report</td></tr>
-    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
-
+<table border=0 cellpadding=0 cellspacing=0 width="100%">
     <tr>
-      <td width="100%">
-        <table cellpadding=1 border=0 width="100%">
-          <tr>
-            <td width="10%" class="headerItem">Current view:</td>
-            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">presentation/provider</a> - movie_detail_notifier.dart<span style="font-size: 80%;"> (source / <a href="movie_detail_notifier.dart.func-sort-c.html">functions</a>)</span></td>
-            <td width="5%"></td>
-            <td width="15%"></td>
-            <td width="10%" class="headerCovTableHead">Hit</td>
-            <td width="10%" class="headerCovTableHead">Total</td>
-            <td width="15%" class="headerCovTableHead">Coverage</td>
-          </tr>
-          <tr>
-            <td class="headerItem">Test:</td>
-            <td class="headerValue">lcov.info</td>
-            <td></td>
-            <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">49</td>
-            <td class="headerCovTableEntry">51</td>
-            <td class="headerCovTableEntryHi">96.1 %</td>
-          </tr>
-          <tr>
-            <td class="headerItem">Date:</td>
-            <td class="headerValue">2022-03-17 17:35:19</td>
-            <td></td>
-            <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">0</td>
-            <td class="headerCovTableEntry">0</td>
-            <td class="headerCovTableEntryHi">-</td>
-          </tr>
-          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
-        </table>
-      </td>
-    </tr>
-
-    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
-  </table>
-
-  <table cellpadding=0 cellspacing=0 border=0>
-    <tr>
-      <td><br></td>
+        <td class="title">LCOV - code coverage report</td>
     </tr>
     <tr>
-      <td>
-<pre class="sourceHeading">          Line data    Source code</pre>
-<pre class="source">
+        <td class="ruler"><img alt="" height=3 src="../../glass.png" width=3></td>
+    </tr>
+
+    <tr>
+        <td width="100%">
+            <table border=0 cellpadding=1 width="100%">
+                <tr>
+                    <td class="headerItem" width="10%">Current view:</td>
+                    <td class="headerValue" width="35%"><a href="../../index.html">top level</a> -
+                        <a href="index.html">presentation/provider</a> -
+                        movie_detail_notifier.dart<span style="font-size: 80%;"> (source / <a
+                                href="movie_detail_notifier.dart.func-sort-c.html">functions</a>)</span>
+                    </td>
+                    <td width="5%"></td>
+                    <td width="15%"></td>
+                    <td class="headerCovTableHead" width="10%">Hit</td>
+                    <td class="headerCovTableHead" width="10%">Total</td>
+                    <td class="headerCovTableHead" width="15%">Coverage</td>
+                </tr>
+                <tr>
+                    <td class="headerItem">Test:</td>
+                    <td class="headerValue">lcov.info</td>
+                    <td></td>
+                    <td class="headerItem">Lines:</td>
+                    <td class="headerCovTableEntry">49</td>
+                    <td class="headerCovTableEntry">51</td>
+                    <td class="headerCovTableEntryHi">96.1 %</td>
+                </tr>
+                <tr>
+                    <td class="headerItem">Date:</td>
+                    <td class="headerValue">2022-03-17 17:35:19</td>
+                    <td></td>
+                    <td class="headerItem">Functions:</td>
+                    <td class="headerCovTableEntry">0</td>
+                    <td class="headerCovTableEntry">0</td>
+                    <td class="headerCovTableEntryHi">-</td>
+                </tr>
+                <tr>
+                    <td><img alt="" height=3 src="../../glass.png" width=3></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    <tr>
+        <td class="ruler"><img alt="" height=3 src="../../glass.png" width=3></td>
+    </tr>
+</table>
+
+<table border=0 cellpadding=0 cellspacing=0>
+    <tr>
+        <td><br></td>
+    </tr>
+    <tr>
+        <td>
+            <pre class="sourceHeading">          Line data    Source code</pre>
+            <pre class="source">
 <a name="1"><span class="lineNum">       1 </span>            : import 'package:ditonton/domain/entities/movie.dart';</a>
 <a name="2"><span class="lineNum">       2 </span>            : import 'package:ditonton/domain/entities/movie_detail.dart';</a>
 <a name="3"><span class="lineNum">       3 </span>            : import 'package:ditonton/domain/usecases/get_movie_detail.dart';</a>
@@ -82,10 +94,12 @@
 <a name="20"><span class="lineNum">      20 </span>            :   final RemoveWatchlist removeWatchlist;</a>
 <a name="21"><span class="lineNum">      21 </span>            : </a>
 <a name="22"><span class="lineNum">      22 </span><span class="lineCov">          1 :   MovieDetailNotifier({</span></a>
-<a name="23"><span class="lineNum">      23 </span>            :     required this.getMovieDetail,</a>
+<a name="23"><span
+        class="lineNum">      23 </span>            :     required this.getMovieDetail,</a>
 <a name="24"><span class="lineNum">      24 </span>            :     required this.getMovieRecommendations,</a>
 <a name="25"><span class="lineNum">      25 </span>            :     required this.getWatchListStatus,</a>
-<a name="26"><span class="lineNum">      26 </span>            :     required this.saveWatchlist,</a>
+<a name="26"><span
+        class="lineNum">      26 </span>            :     required this.saveWatchlist,</a>
 <a name="27"><span class="lineNum">      27 </span>            :     required this.removeWatchlist,</a>
 <a name="28"><span class="lineNum">      28 </span>            :   });</a>
 <a name="29"><span class="lineNum">      29 </span>            : </a>
@@ -138,7 +152,8 @@
 <a name="76"><span class="lineNum">      76 </span>            :     );</a>
 <a name="77"><span class="lineNum">      77 </span>            :   }</a>
 <a name="78"><span class="lineNum">      78 </span>            : </a>
-<a name="79"><span class="lineNum">      79 </span>            :   String _watchlistMessage = '';</a>
+<a name="79"><span
+        class="lineNum">      79 </span>            :   String _watchlistMessage = '';</a>
 <a name="80"><span class="lineNum">      80 </span><span class="lineCov">          2 :   String get watchlistMessage =&gt; _watchlistMessage;</span></a>
 <a name="81"><span class="lineNum">      81 </span>            : </a>
 <a name="82"><span class="lineNum">      82 </span><span class="lineCov">          1 :   Future&lt;void&gt; addWatchlist(MovieDetail movie) async {</span></a>
@@ -178,16 +193,21 @@
 <a name="116"><span class="lineNum">     116 </span>            :   }</a>
 <a name="117"><span class="lineNum">     117 </span>            : }</a>
 </pre>
-      </td>
+        </td>
     </tr>
-  </table>
-  <br>
+</table>
+<br>
 
-  <table width="100%" border=0 cellspacing=0 cellpadding=0>
-    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
-    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.15</a></td></tr>
-  </table>
-  <br>
+<table border=0 cellpadding=0 cellspacing=0 width="100%">
+    <tr>
+        <td class="ruler"><img alt="" height=3 src="../../glass.png" width=3></td>
+    </tr>
+    <tr>
+        <td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php"
+                                                 target="_parent">LCOV version 1.15</a></td>
+    </tr>
+</table>
+<br>
 
 </body>
 </html>

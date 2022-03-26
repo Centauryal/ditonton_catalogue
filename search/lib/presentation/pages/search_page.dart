@@ -1,16 +1,13 @@
 import 'package:core/core.dart';
-import 'package:core/presentation/widgets/movie_card_list.dart';
-import 'package:core/presentation/widgets/tv_show_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie/movie.dart';
 import 'package:search/presentation/bloc/search_bloc.dart';
 import 'package:search/presentation/bloc/search_tv_show_bloc.dart';
+import 'package:tvshow/tvshow.dart';
 
 class SearchPage extends StatelessWidget {
-  const SearchPage({
-    Key? key,
-    required this.isTvShow
-  }) : super(key: key);
+  const SearchPage({Key? key, required this.isTvShow}) : super(key: key);
 
   final bool isTvShow;
 
@@ -31,9 +28,7 @@ class SearchPage extends StatelessWidget {
                     ? context
                         .read<SearchTvShowBloc>()
                         .add(OnQueryChangedTvShow(query))
-                    : context
-                        .read<SearchBloc>()
-                        .add(OnQueryChanged(query));
+                    : context.read<SearchBloc>().add(OnQueryChanged(query));
               },
               decoration: const InputDecoration(
                 hintText: 'Search title',

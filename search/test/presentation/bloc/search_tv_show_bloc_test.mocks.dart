@@ -37,6 +37,7 @@ class MockSearchTvShow extends _i1.Mock implements _i4.SearchTvShow {
   _i2.MovieRepository get repository =>
       (super.noSuchMethod(Invocation.getter(#repository),
           returnValue: _FakeMovieRepository_0()) as _i2.MovieRepository);
+
   @override
   _i5.Future<_i3.Either<_i6.Failure, List<_i7.TvShow>>> execute(
           String? query) =>

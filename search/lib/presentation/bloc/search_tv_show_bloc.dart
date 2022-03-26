@@ -11,19 +11,17 @@ class SearchTvShowBloc extends Bloc<SearchTvShowEvent, SearchTvShowState> {
   final SearchTvShow _searchTvShows;
 
   SearchTvShowBloc(this._searchTvShows) : super(SearchTvShowEmpty()) {
-    on<OnQueryChangedTvShow>(
-      (event, emit) async {
-        final query = event.query;
+    on<OnQueryChangedTvShow>((event, emit) async {
+      final query = event.query;
 
-        emit(SearchTvShowLoading());
-        final result = await _searchTvShows.execute(query);
+      emit(SearchTvShowLoading());
+      final result = await _searchTvShows.execute(query);
 
-        result.fold((failure) {
-          emit(SearchTvShowError(failure.message));
-        }, (data) {
-          emit(SearchTvShowHasData(data));
-        });
-      },
-      transformer: debounce(const Duration(milliseconds: 500)));
+      result.fold((failure) {
+        emit(SearchTvShowError(failure.message));
+      }, (data) {
+        emit(SearchTvShowHasData(data));
+      });
+    }, transformer: debounce(const Duration(milliseconds: 500)));
   }
 }

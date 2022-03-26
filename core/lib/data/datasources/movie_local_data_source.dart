@@ -1,5 +1,3 @@
-
-
 import 'package:core/core.dart';
 import 'package:core/data/datasources/db/database_helper.dart';
 import 'package:core/data/models/movie/movie_table.dart';
@@ -7,15 +5,23 @@ import 'package:core/data/models/tvshow/tv_show_table.dart';
 
 abstract class MovieLocalDataSource {
   Future<String> insertWatchlist(MovieTable movie);
+
   Future<String> removeWatchlist(MovieTable movie);
+
   Future<MovieTable?> getMovieById(int id);
+
   Future<List<MovieTable>> getWatchlistMovies();
+
   Future<void> cacheNowPlayingMovies(List<MovieTable> movies);
+
   Future<List<MovieTable>> getCachedNowPlayingMovies();
 
   Future<String> insertWatchlistTvShow(TvShowTable tvShow);
+
   Future<String> removeWatchlistTvShow(TvShowTable tvShow);
+
   Future<TvShowTable?> getTvShowById(int id);
+
   Future<List<TvShowTable>> getWatchlistTvShows();
 }
 

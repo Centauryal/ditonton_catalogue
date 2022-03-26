@@ -1,33 +1,18 @@
 import 'package:about/about.dart';
 import 'package:core/core.dart';
-import 'package:core/presentation/pages/movie/movie_detail_page.dart';
-import 'package:core/presentation/pages/home_page.dart';
-import 'package:core/presentation/pages/movie/popular_movies_page.dart';
-import 'package:core/presentation/pages/movie/top_rated_movies_page.dart';
-import 'package:core/presentation/pages/tvshow/tv_show_detail_page.dart';
-import 'package:core/presentation/pages/tvshow/popular_tv_shows_page.dart';
-import 'package:core/presentation/pages/tvshow/top_rated_tv_shows_page.dart';
-import 'package:core/presentation/pages/tvshow/tv_show_page.dart';
-import 'package:core/presentation/pages/watchlist_movies_page.dart';
-import 'package:core/presentation/provider/movie_detail_notifier.dart';
-import 'package:core/presentation/provider/movie_list_notifier.dart';
-import 'package:core/presentation/provider/popular_movies_notifier.dart';
-import 'package:core/presentation/provider/popular_tv_shows_notifier.dart';
-import 'package:core/presentation/provider/top_rated_movies_notifier.dart';
-import 'package:core/presentation/provider/top_rated_tv_shows_notifier.dart';
-import 'package:core/presentation/provider/tv_show_detail_notifier.dart';
-import 'package:core/presentation/provider/tv_show_list_notifier.dart';
-import 'package:core/presentation/provider/watchlist_movie_notifier.dart';
-import 'package:core/presentation/provider/watchlist_tv_show_notifier.dart';
 import 'package:core/utils/routes.dart';
+import 'package:ditonton/home_page.dart';
+import 'package:ditonton/injection.dart' as di;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
-import 'package:ditonton/injection.dart' as di;
+import 'package:movie/movie.dart';
 import 'package:search/search.dart';
+import 'package:tvshow/tvshow.dart';
+import 'package:watchlist/watchlist.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await di.init();
   runApp(MyApp());
 }
@@ -35,43 +20,49 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
+    return MultiBlocProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieListNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<MovieNowPlayingBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieDetailNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<MovieDetailBloc>(),
         ),
         BlocProvider(
           create: (_) => di.locator<SearchBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TopRatedMoviesNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<MovieTopRatedBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<PopularMoviesNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<MoviePopularBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<WatchlistMovieNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<MovieRecommendationBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvShowListNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<WatchlistMovieBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvShowDetailNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<TvShowOnAirBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<TvShowDetailBloc>(),
         ),
         BlocProvider(
           create: (_) => di.locator<SearchTvShowBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TopRatedTvShowsNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<TvShowTopRatedBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<PopularTvShowsNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<TvShowPopularBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<WatchlistTvShowNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<TvShowRecommendationBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<WatchlistTvShowBloc>(),
         ),
       ],
       child: MaterialApp(
@@ -86,39 +77,39 @@ class MyApp extends StatelessWidget {
         navigatorObservers: [routeObserver],
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
-            case '/home':
+            case homeRoute:
               return MaterialPageRoute(builder: (_) => HomePage());
-            case TV_SHOW_ROUTE:
+            case tvShowRoute:
               return MaterialPageRoute(builder: (_) => TvShowPage());
-            case POPULAR_MOVIE_ROUTE:
+            case popularMovieRoute:
               return CupertinoPageRoute(builder: (_) => PopularMoviesPage());
-            case POPULAR_TV_SHOW_ROUTE:
+            case popularTvShowRoute:
               return CupertinoPageRoute(builder: (_) => PopularTvShowsPage());
-            case TOP_RATED_MOVIE_ROUTE:
+            case topRatedMovieRoute:
               return CupertinoPageRoute(builder: (_) => TopRatedMoviesPage());
-            case TOP_RATED_TV_SHOW_ROUTE:
+            case topRatedTvShowwRoute:
               return CupertinoPageRoute(builder: (_) => TopRatedTvShowsPage());
-            case MOVIE_DETAIL_ROUTE:
+            case movieDetailRoute:
               final id = settings.arguments as int;
               return MaterialPageRoute(
                 builder: (_) => MovieDetailPage(id: id),
                 settings: settings,
               );
-            case TV_SHOW_DETAIL_ROUTE:
+            case tvShowDetailRoute:
               final id = settings.arguments as int;
               return MaterialPageRoute(
                 builder: (_) => TvShowDetailPage(id: id),
                 settings: settings,
               );
-            case SEARCH_ROUTE:
+            case searchRoute:
               final isTvShow = settings.arguments as bool;
               return CupertinoPageRoute(
                 builder: (_) => SearchPage(isTvShow: isTvShow),
                 settings: settings,
               );
-            case WATCHLIST_ROUTE:
+            case watchlistRoute:
               return MaterialPageRoute(builder: (_) => WatchlistMoviesPage());
-            case AboutPage.ROUTE_NAME:
+            case aboutRoute:
               return MaterialPageRoute(builder: (_) => AboutPage());
             default:
               return MaterialPageRoute(builder: (_) {
