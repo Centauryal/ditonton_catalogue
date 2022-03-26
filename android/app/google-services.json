@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "43323408905",
+    "project_id": "ditonton-catalogue",
+    "storage_bucket": "ditonton-catalogue.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:43323408905:android:0d8271f5f8db6725e9aed8",
+        "android_client_info": {
+          "package_name": "com.centaury.ditonton"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "43323408905-1l1udn4mkcerl7v2beg2rql6d2jvanq7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIvb-GvjNbGLxktt7jvQIWITgHR6UthgA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "43323408905-1l1udn4mkcerl7v2beg2rql6d2jvanq7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

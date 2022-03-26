@@ -53,6 +53,8 @@ dependencies:
     path: search
   about:
     path: about
+  firebase_core: ^1.13.1
+  firebase_crashlytics: ^2.5.3
 
 dev_dependencies:
   flutter_test:

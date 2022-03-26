@@ -1,4 +1,5 @@
 import 'package:core/utils/routes.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/movie.dart';
 
@@ -52,6 +53,7 @@ class HomePage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
+              FirebaseCrashlytics.instance.crash();
               Navigator.pushNamed(context, searchRoute, arguments: false);
             },
             icon: Icon(Icons.search),
