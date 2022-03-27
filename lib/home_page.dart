@@ -53,7 +53,6 @@ class HomePage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              FirebaseCrashlytics.instance.crash();
               Navigator.pushNamed(context, searchRoute, arguments: false);
             },
             icon: Icon(Icons.search),
