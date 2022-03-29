@@ -35,6 +35,10 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
 
   @override
   Widget build(BuildContext context) {
+    var isAddedWatchlist = context.select((WatchlistMovieBloc bloc) =>
+        bloc.state is MovieIsAddedWatchlist
+            ? (bloc.state as MovieIsAddedWatchlist).isAdded
+            : false);
     return Scaffold(
       body: BlocBuilder<MovieDetailBloc, MovieDetailState>(
         builder: (context, state) {
@@ -45,7 +49,10 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
           } else if (state is MovieDetailHasData) {
             final movie = state.result;
             return SafeArea(
-              child: DetailContent(movie),
+              child: DetailContent(
+                isAddedWatchlist,
+                movie: movie,
+              ),
             );
           } else if (state is MovieDetailError) {
             return Text(state.message);
@@ -60,18 +67,28 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
   }
 }
 
-class DetailContent extends StatelessWidget {
+class DetailContent extends StatefulWidget {
   final MovieDetail movie;
+  bool isAddedWatchlist;
 
-  const DetailContent(this.movie, {Key? key}) : super(key: key);
+  DetailContent(
+    this.isAddedWatchlist, {
+    Key? key,
+    required this.movie,
+  }) : super(key: key);
 
+  @override
+  State<DetailContent> createState() => _DetailContentState();
+}
+
+class _DetailContentState extends State<DetailContent> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     return Stack(
       children: [
         CachedNetworkImage(
-          imageUrl: '$baseImageUrl${movie.posterPath}',
+          imageUrl: '$baseImageUrl${widget.movie.posterPath}',
           width: screenWidth,
           placeholder: (context, url) => const Center(
             child: CircularProgressIndicator(),
@@ -102,16 +119,10 @@ class DetailContent extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              movie.title,
+                              widget.movie.title,
                               style: kHeading5,
                             ),
                             Builder(builder: (context) {
-                              var isAddedWatchlist = context.select(
-                                  (WatchlistMovieBloc bloc) => bloc.state
-                                          is MovieIsAddedWatchlist
-                                      ? (bloc.state as MovieIsAddedWatchlist)
-                                          .isAdded
-                                      : false);
                               var message = context.select(
                                   (WatchlistMovieBloc bloc) => bloc.state
                                           is MovieIsAddedWatchlist
@@ -120,20 +131,19 @@ class DetailContent extends StatelessWidget {
                                               false
                                           ? watchlistAddMessage
                                           : watchlistRemoveMessage
-                                      : !isAddedWatchlist
+                                      : !widget.isAddedWatchlist
                                           ? watchlistAddMessage
                                           : watchlistRemoveMessage);
 
                               return ElevatedButton(
                                 onPressed: () async {
-                                  if (!isAddedWatchlist) {
-                                    context
-                                        .read<WatchlistMovieBloc>()
-                                        .add(AddMovieToWatchlist(movie));
+                                  if (widget.isAddedWatchlist) {
+                                    context.read<WatchlistMovieBloc>().add(
+                                        RemoveMovieFromWatchlist(widget.movie));
                                   } else {
                                     context
                                         .read<WatchlistMovieBloc>()
-                                        .add(RemoveMovieFromWatchlist(movie));
+                                        .add(AddMovieToWatchlist(widget.movie));
                                   }
 
                                   if (message == watchlistAddMessage ||
@@ -149,11 +159,16 @@ class DetailContent extends StatelessWidget {
                                           );
                                         });
                                   }
+
+                                  setState(() {
+                                    widget.isAddedWatchlist =
+                                        !widget.isAddedWatchlist;
+                                  });
                                 },
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    isAddedWatchlist
+                                    widget.isAddedWatchlist
                                         ? const Icon(Icons.check)
                                         : const Icon(Icons.add),
                                     const Text('Watchlist'),
@@ -162,15 +177,15 @@ class DetailContent extends StatelessWidget {
                               );
                             }),
                             Text(
-                              _showGenres(movie.genres),
+                              _showGenres(widget.movie.genres),
                             ),
                             Text(
-                              _showDuration(movie.runtime),
+                              _showDuration(widget.movie.runtime),
                             ),
                             Row(
                               children: [
                                 RatingBarIndicator(
-                                  rating: movie.voteAverage / 2,
+                                  rating: widget.movie.voteAverage / 2,
                                   itemCount: 5,
                                   itemBuilder: (context, index) => const Icon(
                                     Icons.star,
@@ -178,7 +193,7 @@ class DetailContent extends StatelessWidget {
                                   ),
                                   itemSize: 24,
                                 ),
-                                Text('${movie.voteAverage}')
+                                Text('${widget.movie.voteAverage}')
                               ],
                             ),
                             const SizedBox(height: 16),
@@ -187,7 +202,7 @@ class DetailContent extends StatelessWidget {
                               style: kHeading6,
                             ),
                             Text(
-                              movie.overview,
+                              widget.movie.overview,
                             ),
                             const SizedBox(height: 16),
                             Text(
