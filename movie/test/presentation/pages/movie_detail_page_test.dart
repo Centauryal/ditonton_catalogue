@@ -244,7 +244,7 @@ void main() {
     await tester.pumpWidget(
         _createTestableWidget(MovieDetailPage(id: testMovieDetail.id)));
 
-    expect(find.byKey(const Key('error')), findsOneWidget);
+    expect(find.byKey(const Key('error_recommendation')), findsOneWidget);
   });
 
   testWidgets('should show container when movie recommendation is empty',
@@ -259,7 +259,7 @@ void main() {
     await tester.pumpWidget(
         _createTestableWidget(MovieDetailPage(id: testMovieDetail.id)));
 
-    expect(find.byKey(const Key('empty')), findsOneWidget);
+    expect(find.byKey(const Key('empty_recommendation')), findsOneWidget);
   });
 
   testWidgets('should back to previous page when arrow back icon was clicked',

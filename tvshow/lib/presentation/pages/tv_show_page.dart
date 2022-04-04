@@ -1,5 +1,4 @@
 import 'package:core/core.dart';
-import 'package:core/presentation/sub_heading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tvshow/presentation/widgets/tv_show_list.dart';

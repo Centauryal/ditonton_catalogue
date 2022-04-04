@@ -320,36 +320,4 @@ void main() {
     expect(find.byKey(const Key('top_rated_0')), findsNothing);
     expect(find.byKey(const Key('movie_page')), findsNothing);
   });
-
-  testWidgets('Tapping search icon should go to search page', (tester) async {
-    when(() => fakeMovieBloc.state)
-        .thenReturn(MovieNowPlayingHasData(testMovieList));
-    when(() => fakePopularMovieBloc.state)
-        .thenReturn(MoviePopularHasData(testMovieList));
-    when(() => fakeTopRatedMovieBloc.state)
-        .thenReturn(MovieTopRatedHasData(testMovieList));
-
-    await tester.pumpWidget(MaterialApp(
-      routes: routes,
-    ));
-
-    expect(find.byKey(const Key('fakeHomePage')), findsOneWidget);
-
-    await tester.tap(find.byKey(const Key('fakeHomePage')));
-
-    for (var i = 0; i < 5; i++) {
-      await tester.pump(const Duration(seconds: 1));
-    }
-
-    expect(find.byIcon(Icons.search), findsOneWidget);
-    expect(find.byKey(const Key('movie_page')), findsOneWidget);
-
-    await tester.tap(find.byIcon(Icons.search));
-
-    for (var i = 0; i < 5; i++) {
-      await tester.pump(const Duration(seconds: 1));
-    }
-
-    expect(find.byKey(const Key('movie_page')), findsNothing);
-  });
 }

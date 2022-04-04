@@ -1,65 +1,30 @@
-import 'package:core/utils/routes.dart';
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/movie.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Material(
       key: ValueKey('home_page'),
-      drawer: Drawer(
-        child: Column(
-          children: [
-            const UserAccountsDrawerHeader(
-              currentAccountPicture: CircleAvatar(
-                backgroundImage: AssetImage('assets/circle-g.png'),
-              ),
-              accountName: Text('Ditonton'),
-              accountEmail: Text('ditonton@centaury.com'),
-            ),
-            ListTile(
-              leading: Icon(Icons.movie),
-              title: Text('Movies'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.tv),
-              title: Text('TV Series'),
-              onTap: () {
-                Navigator.pushNamed(context, tvShowRoute);
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.save_alt),
-              title: Text('Watchlist'),
-              onTap: () {
-                Navigator.pushNamed(context, watchlistRoute);
-              },
-            ),
-            ListTile(
-              onTap: () {
-                Navigator.pushNamed(context, aboutRoute);
-              },
-              leading: Icon(Icons.info_outline),
-              title: Text('About'),
-            ),
-          ],
+      child: CustomDrawer(
+        routes: homeRoute,
+        content: Scaffold(
+          appBar: AppBar(
+            leading: Icon(Icons.menu),
+            title: Text('Ditonton'),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, searchRoute, arguments: false);
+                },
+                icon: Icon(Icons.search),
+              )
+            ],
+          ),
+          body: MoviePage(),
         ),
       ),
-      appBar: AppBar(
-        title: Text('Ditonton'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, searchRoute, arguments: false);
-            },
-            icon: Icon(Icons.search),
-          )
-        ],
-      ),
-      body: MoviePage(),
     );
   }
 }

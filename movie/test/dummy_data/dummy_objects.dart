@@ -11,7 +11,7 @@ import 'package:core/domain/entities/tv_show_detail.dart';
 final testMovie = Movie(
   adult: false,
   backdropPath: '/muth4OYamXf41G2evdrLEg8d3om.jpg',
-  genreIds: [14, 28],
+  genreIds: const [14, 28],
   id: 557,
   originalTitle: 'Spider-Man',
   overview:
@@ -28,10 +28,10 @@ final testMovie = Movie(
 final testTvShow = TvShow(
   backdropPath: "/7q448EVOnuE3gVAx24krzO7SNXM.jpg",
   firstAirDate: "2021-09-03",
-  genreIds: [10764],
+  genreIds: const [10764],
   id: 130392,
   name: "The D'Amelio Show",
-  originCountry: ["US"],
+  originCountry: const ["US"],
   originalLanguage: "en",
   originalName: "The D'Amelio Show",
   overview:
@@ -63,7 +63,7 @@ final testMovieDetail = MovieDetail(
 final testTvShowDetail = TvShowDetail(
     adult: false,
     backdropPath: 'backdropPath',
-    episodeRunTime: [22],
+    episodeRunTime: const [22],
     firstAirDate: 'firstAirDate',
     genres: [Genre(id: 1, name: 'Action')],
     homepage: 'homepage',

@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
 import 'package:core/domain/entities/genre.dart';
 import 'package:core/domain/entities/movie_detail.dart';
-import 'package:core/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -74,6 +73,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
   }
 }
 
+// ignore: must_be_immutable
 class DetailContent extends StatefulWidget {
   final MovieDetail movie;
   bool isAddedWatchlist;
@@ -274,7 +274,7 @@ class _DetailContentState extends State<DetailContent> {
                                   );
                                 } else {
                                   return Container(
-                                    key: const Key('empty'),
+                                    key: const Key('empty_recommendation'),
                                   );
                                 }
                               },

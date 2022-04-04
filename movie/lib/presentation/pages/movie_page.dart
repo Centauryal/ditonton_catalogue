@@ -1,5 +1,4 @@
 import 'package:core/core.dart';
-import 'package:core/presentation/sub_heading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/movie.dart';
@@ -45,7 +44,7 @@ class _MoviePageState extends State<MoviePage> {
               } else if (state is MovieNowPlayingHasData) {
                 return MovieList(
                   state.result,
-                  key: const ValueKey('now_playing_'),
+                  valueKey: 'now_playing_',
                 );
               } else if (state is MovieNowPlayingError) {
                 return const Text(
@@ -75,7 +74,7 @@ class _MoviePageState extends State<MoviePage> {
               } else if (state is MoviePopularHasData) {
                 return MovieList(
                   state.result,
-                  key: const ValueKey('popular_'),
+                  valueKey: 'popular_',
                 );
               } else if (state is MoviePopularError) {
                 return const Text(
@@ -105,7 +104,7 @@ class _MoviePageState extends State<MoviePage> {
               } else if (state is MovieTopRatedHasData) {
                 return MovieList(
                   state.result,
-                  key: const ValueKey('top_rated_'),
+                  valueKey: 'top_rated_',
                 );
               } else if (state is MovieTopRatedError) {
                 return const Text(
