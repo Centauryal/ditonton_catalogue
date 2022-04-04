@@ -43,6 +43,7 @@ class MockGetOnAirTvShow extends _i1.Mock implements _i4.GetOnAirTvShow {
   _i2.MovieRepository get repository =>
       (super.noSuchMethod(Invocation.getter(#repository),
           returnValue: _FakeMovieRepository_0()) as _i2.MovieRepository);
+
   @override
   _i5.Future<_i3.Either<_i6.Failure, List<_i7.TvShow>>> execute() =>
       (super.noSuchMethod(Invocation.method(#execute, []),
@@ -63,6 +64,7 @@ class MockGetPopularTvShow extends _i1.Mock implements _i8.GetPopularTvShow {
   _i2.MovieRepository get repository =>
       (super.noSuchMethod(Invocation.getter(#repository),
           returnValue: _FakeMovieRepository_0()) as _i2.MovieRepository);
+
   @override
   _i5.Future<_i3.Either<_i6.Failure, List<_i7.TvShow>>> execute() =>
       (super.noSuchMethod(Invocation.method(#execute, []),
@@ -83,6 +85,7 @@ class MockGetTopRatedTvShow extends _i1.Mock implements _i9.GetTopRatedTvShow {
   _i2.MovieRepository get repository =>
       (super.noSuchMethod(Invocation.getter(#repository),
           returnValue: _FakeMovieRepository_0()) as _i2.MovieRepository);
+
   @override
   _i5.Future<_i3.Either<_i6.Failure, List<_i7.TvShow>>> execute() =>
       (super.noSuchMethod(Invocation.method(#execute, []),
@@ -104,6 +107,7 @@ class MockGetTvShowRecommendations extends _i1.Mock
   _i2.MovieRepository get repository =>
       (super.noSuchMethod(Invocation.getter(#repository),
           returnValue: _FakeMovieRepository_0()) as _i2.MovieRepository);
+
   @override
   _i5.Future<_i3.Either<_i6.Failure, List<_i7.TvShow>>> execute(dynamic id) =>
       (super.noSuchMethod(Invocation.method(#execute, [id]),
@@ -124,6 +128,7 @@ class MockGetTvShowDetail extends _i1.Mock implements _i11.GetTvShowDetail {
   _i2.MovieRepository get repository =>
       (super.noSuchMethod(Invocation.getter(#repository),
           returnValue: _FakeMovieRepository_0()) as _i2.MovieRepository);
+
   @override
   _i5.Future<_i3.Either<_i6.Failure, _i12.TvShowDetail>> execute(int? id) =>
       (super.noSuchMethod(Invocation.method(#execute, [id]),

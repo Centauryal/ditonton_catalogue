@@ -1,6 +1,5 @@
 import 'package:core/core.dart';
-import 'package:core/presentation/widgets/sub_heading_widget.dart';
-import 'package:core/utils/routes.dart';
+import 'package:core/presentation/sub_heading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tvshow/presentation/widgets/tv_show_list.dart';
@@ -62,6 +61,7 @@ class _TvShowPageState extends State<TvShowPage> {
               buildSubHeading(
                 title: 'Popular',
                 onTap: () => Navigator.pushNamed(context, popularTvShowRoute),
+                key: const ValueKey('see_more_popular'),
               ),
               BlocBuilder<TvShowPopularBloc, TvShowPopularState>(
                   builder: (context, state) {
@@ -78,6 +78,7 @@ class _TvShowPageState extends State<TvShowPage> {
               buildSubHeading(
                 title: 'Top Rated',
                 onTap: () => Navigator.pushNamed(context, topRatedTvShowwRoute),
+                key: const ValueKey('see_more_top_rated'),
               ),
               BlocBuilder<TvShowTopRatedBloc, TvShowTopRatedState>(
                   builder: (context, state) {

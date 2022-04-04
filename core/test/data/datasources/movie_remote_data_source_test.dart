@@ -37,8 +37,7 @@ void main() {
     test('should return list of Movie Model when the response code is 200',
         () async {
       // arrange
-      when(mockIOClient
-              .get(Uri.parse('$baseUrl/movie/now_playing?$apiKey')))
+      when(mockIOClient.get(Uri.parse('$baseUrl/movie/now_playing?$apiKey')))
           .thenAnswer((_) async =>
               http.Response(readJson('dummy_data/now_playing.json'), 200));
       // act
@@ -63,8 +62,7 @@ void main() {
         'should throw a ServerException when the response code movie is 404 or other',
         () async {
       // arrange
-      when(mockIOClient
-              .get(Uri.parse('$baseUrl/movie/now_playing?$apiKey')))
+      when(mockIOClient.get(Uri.parse('$baseUrl/movie/now_playing?$apiKey')))
           .thenAnswer((_) async => http.Response('Not Found', 404));
       // act
       final call = dataSource.getNowPlayingMovies();
@@ -321,8 +319,8 @@ void main() {
 
     test('should return list of tvshow when response code is 200', () async {
       // arrange
-      when(mockIOClient.get(
-              Uri.parse('$baseUrl/search/tv?$apiKey&query=$tQueryTvShow')))
+      when(mockIOClient
+              .get(Uri.parse('$baseUrl/search/tv?$apiKey&query=$tQueryTvShow')))
           .thenAnswer((_) async =>
               http.Response(readJson('dummy_data/search_tv_show.json'), 200));
       // act
@@ -348,8 +346,8 @@ void main() {
         'should throw ServerException when response code tvshow is other than 200',
         () async {
       // arrange
-      when(mockIOClient.get(
-              Uri.parse('$baseUrl/search/tv?$apiKey&query=$tQueryTvShow')))
+      when(mockIOClient
+              .get(Uri.parse('$baseUrl/search/tv?$apiKey&query=$tQueryTvShow')))
           .thenAnswer((_) async => http.Response('Not Found', 404));
       // act
       final call = dataSource.searchTvShows(tQueryTvShow);

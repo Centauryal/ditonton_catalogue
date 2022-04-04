@@ -1,6 +1,5 @@
 import 'package:about/about.dart';
 import 'package:core/core.dart';
-import 'package:core/utils/routes.dart';
 import 'package:ditonton/home_page.dart';
 import 'package:ditonton/injection.dart' as di;
 import 'package:firebase_core/firebase_core.dart';

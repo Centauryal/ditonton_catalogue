@@ -33,7 +33,8 @@ void main() {
   });
 
   group(
-    'watchlist tvshow', () {
+    'watchlist tvshow',
+    () {
       blocTest<WatchlistTvShowBloc, WatchlistTvShowState>(
         'should emit [Loading, HasData] when watchlist data is gotten succesfully',
         build: () {
@@ -84,7 +85,8 @@ void main() {
   );
 
   group(
-    'watchlist tvshow status', () {
+    'watchlist tvshow status',
+    () {
       blocTest<WatchlistTvShowBloc, WatchlistTvShowState>(
         'get status should get true when the watchlist status is true',
         build: () {
@@ -92,7 +94,8 @@ void main() {
               .thenAnswer((_) async => true);
           return watchlistTvShowBloc;
         },
-        act: (bloc) => bloc.add(FetchWatchlistTvShowStatus(testTvShowDetail.id)),
+        act: (bloc) =>
+            bloc.add(FetchWatchlistTvShowStatus(testTvShowDetail.id)),
         expect: () => [
           const TvShowIsAddedWatchlist(true),
         ],
@@ -109,7 +112,8 @@ void main() {
               .thenAnswer((_) async => false);
           return watchlistTvShowBloc;
         },
-        act: (bloc) => bloc.add(FetchWatchlistTvShowStatus(testTvShowDetail.id)),
+        act: (bloc) =>
+            bloc.add(FetchWatchlistTvShowStatus(testTvShowDetail.id)),
         expect: () => [
           const TvShowIsAddedWatchlist(false),
         ],
@@ -144,8 +148,9 @@ void main() {
       blocTest<WatchlistTvShowBloc, WatchlistTvShowState>(
         'get status should throw failure message status when add watchlist is unsuccessful',
         build: () {
-          when(saveWatchlistTvShow.execute(testTvShowDetail)).thenAnswer((_) async =>
-              const Left(DatabaseFailure('can\'t add data to watchlist')));
+          when(saveWatchlistTvShow.execute(testTvShowDetail)).thenAnswer(
+              (_) async =>
+                  const Left(DatabaseFailure('can\'t add data to watchlist')));
           return watchlistTvShowBloc;
         },
         act: (bloc) => bloc.add(AddTvShowToWatchlist(testTvShowDetail)),
@@ -161,8 +166,8 @@ void main() {
       blocTest<WatchlistTvShowBloc, WatchlistTvShowState>(
         'get status should update watchlist status when remove watchlist is success',
         build: () {
-          when(removeWatchlistTvShow.execute(testTvShowDetail)).thenAnswer(
-              (_) async => const Right(watchlistRemoveMessage));
+          when(removeWatchlistTvShow.execute(testTvShowDetail))
+              .thenAnswer((_) async => const Right(watchlistRemoveMessage));
           return watchlistTvShowBloc;
         },
         act: (bloc) => bloc.add(RemoveTvShowFromWatchlist(testTvShowDetail)),
@@ -178,8 +183,9 @@ void main() {
       blocTest<WatchlistTvShowBloc, WatchlistTvShowState>(
         'get status should throw failure message status when remove watchlist is unsuccessful',
         build: () {
-          when(removeWatchlistTvShow.execute(testTvShowDetail)).thenAnswer((_) async =>
-              const Left(DatabaseFailure('can\'t add data to watchlist')));
+          when(removeWatchlistTvShow.execute(testTvShowDetail)).thenAnswer(
+              (_) async =>
+                  const Left(DatabaseFailure('can\'t add data to watchlist')));
           return watchlistTvShowBloc;
         },
         act: (bloc) => bloc.add(RemoveTvShowFromWatchlist(testTvShowDetail)),

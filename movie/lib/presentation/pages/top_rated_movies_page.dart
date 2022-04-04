@@ -26,6 +26,7 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: BlocBuilder<MovieTopRatedBloc, MovieTopRatedState>(
+          key: const ValueKey('top_rated_movies_page'),
           builder: (context, state) {
             if (state is MovieTopRatedLoading) {
               return const Center(
@@ -35,18 +36,24 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final movie = state.result[index];
-                  return MovieCard(movie);
+                  return MovieCard(
+                    movie,
+                    key: Key('movie_card_$index'),
+                  );
                 },
                 itemCount: state.result.length,
               );
             } else if (state is MovieTopRatedError) {
               return Center(
-                key: const Key('error_message'),
                 child: Text(state.message),
+                key: const Key('error_message'),
               );
             } else {
-              return Expanded(
-                child: Container(),
+              return const Center(
+                child: Text(
+                  'There are no one top rated movie',
+                  key: Key('empty_data'),
+                ),
               );
             }
           },

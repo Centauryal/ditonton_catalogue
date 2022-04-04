@@ -64,6 +64,7 @@ class MockSaveWatchlist extends _i1.Mock implements _i8.SaveWatchlist {
   _i3.MovieRepository get repository =>
       (super.noSuchMethod(Invocation.getter(#repository),
           returnValue: _FakeMovieRepository_1()) as _i3.MovieRepository);
+
   @override
   _i5.Future<_i2.Either<_i6.Failure, String>> execute(_i9.MovieDetail? movie) =>
       (super.noSuchMethod(Invocation.method(#execute, [movie]),
@@ -84,6 +85,7 @@ class MockRemoveWatchlist extends _i1.Mock implements _i10.RemoveWatchlist {
   _i3.MovieRepository get repository =>
       (super.noSuchMethod(Invocation.getter(#repository),
           returnValue: _FakeMovieRepository_1()) as _i3.MovieRepository);
+
   @override
   _i5.Future<_i2.Either<_i6.Failure, String>> execute(_i9.MovieDetail? movie) =>
       (super.noSuchMethod(Invocation.method(#execute, [movie]),
@@ -105,6 +107,7 @@ class MockGetWatchListStatus extends _i1.Mock
   _i3.MovieRepository get repository =>
       (super.noSuchMethod(Invocation.getter(#repository),
           returnValue: _FakeMovieRepository_1()) as _i3.MovieRepository);
+
   @override
   _i5.Future<bool> execute(int? id) =>
       (super.noSuchMethod(Invocation.method(#execute, [id]),
@@ -124,6 +127,7 @@ class MockGetWatchlistTvShow extends _i1.Mock
   _i3.MovieRepository get repository =>
       (super.noSuchMethod(Invocation.getter(#repository),
           returnValue: _FakeMovieRepository_1()) as _i3.MovieRepository);
+
   @override
   _i5.Future<_i2.Either<_i6.Failure, List<_i13.TvShow>>> execute() =>
       (super.noSuchMethod(Invocation.method(#execute, []),
@@ -145,6 +149,7 @@ class MockSaveWatchlistTvShow extends _i1.Mock
   _i3.MovieRepository get repository =>
       (super.noSuchMethod(Invocation.getter(#repository),
           returnValue: _FakeMovieRepository_1()) as _i3.MovieRepository);
+
   @override
   _i5.Future<_i2.Either<_i6.Failure, String>> execute(
           _i15.TvShowDetail? tvShow) =>
@@ -167,6 +172,7 @@ class MockRemoveWatchlistTvShow extends _i1.Mock
   _i3.MovieRepository get repository =>
       (super.noSuchMethod(Invocation.getter(#repository),
           returnValue: _FakeMovieRepository_1()) as _i3.MovieRepository);
+
   @override
   _i5.Future<_i2.Either<_i6.Failure, String>> execute(
           _i15.TvShowDetail? tvShow) =>

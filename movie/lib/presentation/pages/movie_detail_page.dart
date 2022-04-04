@@ -41,6 +41,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
             : false);
     return Scaffold(
       body: BlocBuilder<MovieDetailBloc, MovieDetailState>(
+        key: const ValueKey('movie_detail_page'),
         builder: (context, state) {
           if (state is MovieDetailLoading) {
             return const Center(
@@ -55,10 +56,16 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
               ),
             );
           } else if (state is MovieDetailError) {
-            return Text(state.message);
+            return Text(
+              state.message,
+              key: const Key('error_message'),
+            );
           } else {
             return const Center(
-              child: Text('Detail is empty'),
+              child: Text(
+                'Detail is empty',
+                key: Key('empty_message'),
+              ),
             );
           }
         },
@@ -211,13 +218,17 @@ class _DetailContentState extends State<DetailContent> {
                             ),
                             BlocBuilder<MovieRecommendationBloc,
                                 MovieRecommendationState>(
+                              key: const ValueKey('recommendation_movie'),
                               builder: (context, state) {
                                 if (state is MovieRecommendationLoading) {
                                   return const Center(
                                     child: CircularProgressIndicator(),
                                   );
                                 } else if (state is MovieRecommendationError) {
-                                  return Text(state.message);
+                                  return Text(
+                                    state.message,
+                                    key: const Key('error_recommendation'),
+                                  );
                                 } else if (state
                                     is MovieRecommendationHasData) {
                                   return SizedBox(
@@ -229,6 +240,7 @@ class _DetailContentState extends State<DetailContent> {
                                         return Padding(
                                           padding: const EdgeInsets.all(4.0),
                                           child: InkWell(
+                                            key: Key('recommendation_$index'),
                                             onTap: () {
                                               Navigator.pushReplacementNamed(
                                                 context,
@@ -261,7 +273,9 @@ class _DetailContentState extends State<DetailContent> {
                                     ),
                                   );
                                 } else {
-                                  return Container();
+                                  return Container(
+                                    key: const Key('empty'),
+                                  );
                                 }
                               },
                             ),

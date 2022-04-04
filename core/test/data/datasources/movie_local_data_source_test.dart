@@ -64,7 +64,8 @@ void main() {
   });
 
   group('remove watchlist', () {
-    test('should return success message when remove movie from database is success',
+    test(
+        'should return success message when remove movie from database is success',
         () async {
       // arrange
       when(mockDatabaseHelper.removeWatchlist(testMovieTable))
@@ -75,7 +76,8 @@ void main() {
       expect(result, 'Removed from Watchlist');
     });
 
-    test('should return success message when remove tvshow from database is success',
+    test(
+        'should return success message when remove tvshow from database is success',
         () async {
       // arrange
       when(mockDatabaseHelper.removeWatchlistTvShow(testTvShowTable))
@@ -86,7 +88,8 @@ void main() {
       expect(result, 'Removed from Watchlist');
     });
 
-    test('should throw DatabaseException when remove movie from database is failed',
+    test(
+        'should throw DatabaseException when remove movie from database is failed',
         () async {
       // arrange
       when(mockDatabaseHelper.removeWatchlist(testMovieTable))
@@ -97,7 +100,8 @@ void main() {
       expect(() => call, throwsA(isA<DatabaseException>()));
     });
 
-    test('should throw DatabaseException when remove tvshow from database is failed',
+    test(
+        'should throw DatabaseException when remove tvshow from database is failed',
         () async {
       // arrange
       when(mockDatabaseHelper.removeWatchlistTvShow(testTvShowTable))

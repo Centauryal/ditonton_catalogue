@@ -26,6 +26,7 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: BlocBuilder<MoviePopularBloc, MoviePopularState>(
+          key: const ValueKey('popular_movies_page'),
           builder: (context, state) {
             if (state is MoviePopularLoading) {
               return const Center(
@@ -35,18 +36,24 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final movie = state.result[index];
-                  return MovieCard(movie);
+                  return MovieCard(
+                    movie,
+                    key: Key('movie_card_$index'),
+                  );
                 },
                 itemCount: state.result.length,
               );
             } else if (state is MoviePopularError) {
               return Center(
-                key: const Key('error_message'),
                 child: Text(state.message),
+                key: const Key('error_message'),
               );
             } else {
-              return Expanded(
-                child: Container(),
+              return const Center(
+                child: Text(
+                  'There are no one popular movie',
+                  key: Key('empty_data'),
+                ),
               );
             }
           },

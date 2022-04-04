@@ -24,21 +24,21 @@ void main() {
   });
 
   blocTest<TvShowDetailBloc, TvShowDetailState>(
-    'should emit [Loading, HasData] when data is gotten successfully',
-    build: () {
-      when(usecase.execute(tId)).thenAnswer((_) async => Right(testTvShowDetail));
-      return tvShowDetailBloc;
-    },
-    act: (bloc) => bloc.add(const OnTvShowDetailCalled(tId)),
-    expect: () => [
-          TvShowDetailLoading(),
-          TvShowDetailHasData(testTvShowDetail),
-        ],
-    verify: (bloc) {
-      verify(usecase.execute(tId));
-      return const OnTvShowDetailCalled(tId).props;
-    }
-  );
+      'should emit [Loading, HasData] when data is gotten successfully',
+      build: () {
+        when(usecase.execute(tId))
+            .thenAnswer((_) async => Right(testTvShowDetail));
+        return tvShowDetailBloc;
+      },
+      act: (bloc) => bloc.add(const OnTvShowDetailCalled(tId)),
+      expect: () => [
+            TvShowDetailLoading(),
+            TvShowDetailHasData(testTvShowDetail),
+          ],
+      verify: (bloc) {
+        verify(usecase.execute(tId));
+        return const OnTvShowDetailCalled(tId).props;
+      });
 
   blocTest<TvShowDetailBloc, TvShowDetailState>(
     'should emit [Loading, HasData] when get data is unsuccessful',

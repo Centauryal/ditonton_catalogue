@@ -237,8 +237,8 @@ void main() {
       final result = await repository.getOnAirTvShows();
       // assert
       verify(mockRemoteDataSource.getNowPlayingTvShows());
-      expect(
-          result, const Left(ConnectionFailure('Failed to connect to the network')));
+      expect(result,
+          const Left(ConnectionFailure('Failed to connect to the network')));
     });
   });
 
@@ -303,8 +303,8 @@ void main() {
       // act
       final result = await repository.getPopularMovies();
       // assert
-      expect(
-          result, const Left(ConnectionFailure('Failed to connect to the network')));
+      expect(result,
+          const Left(ConnectionFailure('Failed to connect to the network')));
     });
   });
 
@@ -369,8 +369,8 @@ void main() {
       // act
       final result = await repository.getTopRatedMovies();
       // assert
-      expect(
-          result, const Left(ConnectionFailure('Failed to connect to the network')));
+      expect(result,
+          const Left(ConnectionFailure('Failed to connect to the network')));
     });
   });
 
@@ -436,8 +436,10 @@ void main() {
       final result = await repository.getMovieDetail(tId);
       // assert
       verify(mockRemoteDataSource.getMovieDetail(tId));
-      expect(result,
-          equals(const Left(ConnectionFailure('Failed to connect to the network'))));
+      expect(
+          result,
+          equals(const Left(
+              ConnectionFailure('Failed to connect to the network'))));
     });
   });
 
@@ -531,8 +533,10 @@ void main() {
       final result = await repository.getTvShowDetail(tId);
       // assert
       verify(mockRemoteDataSource.getTvShowDetail(tId));
-      expect(result,
-          equals(const Left(ConnectionFailure('Failed to connect to the network'))));
+      expect(
+          result,
+          equals(const Left(
+              ConnectionFailure('Failed to connect to the network'))));
     });
   });
 
@@ -605,8 +609,10 @@ void main() {
       final result = await repository.getMovieRecommendations(tId);
       // assert
       verify(mockRemoteDataSource.getMovieRecommendations(tId));
-      expect(result,
-          equals(const Left(ConnectionFailure('Failed to connect to the network'))));
+      expect(
+          result,
+          equals(const Left(
+              ConnectionFailure('Failed to connect to the network'))));
     });
   });
 
@@ -651,7 +657,8 @@ void main() {
       expect(result, const Left(ServerFailure('')));
     });
 
-    test('should return ServerFailure when call to data source tvshow is unsuccessful',
+    test(
+        'should return ServerFailure when call to data source tvshow is unsuccessful',
         () async {
       // arrange
       when(mockRemoteDataSource.searchTvShows(tTvShowQuery))
@@ -671,13 +678,14 @@ void main() {
       // act
       final result = await repository.searchMovies(tQuery);
       // assert
-      expect(
-          result, const Left(ConnectionFailure('Failed to connect to the network')));
+      expect(result,
+          const Left(ConnectionFailure('Failed to connect to the network')));
     });
   });
 
   group('save watchlist', () {
-    test('should return success message when movie saving successful', () async {
+    test('should return success message when movie saving successful',
+        () async {
       // arrange
       when(mockLocalDataSource.insertWatchlist(testMovieTable))
           .thenAnswer((_) async => 'Added to Watchlist');
@@ -687,7 +695,8 @@ void main() {
       expect(result, const Right('Added to Watchlist'));
     });
 
-    test('should return success message when tvshow saving successful', () async {
+    test('should return success message when tvshow saving successful',
+        () async {
       // arrange
       when(mockLocalDataSource.insertWatchlistTvShow(testTvShowTable))
           .thenAnswer((_) async => 'Added to Watchlist');
@@ -697,7 +706,8 @@ void main() {
       expect(result, const Right('Added to Watchlist'));
     });
 
-    test('should return DatabaseFailure when movie saving unsuccessful', () async {
+    test('should return DatabaseFailure when movie saving unsuccessful',
+        () async {
       // arrange
       when(mockLocalDataSource.insertWatchlist(testMovieTable))
           .thenThrow(DatabaseException('Failed to add watchlist'));
@@ -707,7 +717,8 @@ void main() {
       expect(result, const Left(DatabaseFailure('Failed to add watchlist')));
     });
 
-    test('should return DatabaseFailure when tvshow saving unsuccessful', () async {
+    test('should return DatabaseFailure when tvshow saving unsuccessful',
+        () async {
       // arrange
       when(mockLocalDataSource.insertWatchlistTvShow(testTvShowTable))
           .thenThrow(DatabaseException('Failed to add watchlist'));
@@ -719,7 +730,8 @@ void main() {
   });
 
   group('remove watchlist', () {
-    test('should return success message when movie remove successful', () async {
+    test('should return success message when movie remove successful',
+        () async {
       // arrange
       when(mockLocalDataSource.removeWatchlist(testMovieTable))
           .thenAnswer((_) async => 'Removed from watchlist');
@@ -729,7 +741,8 @@ void main() {
       expect(result, const Right('Removed from watchlist'));
     });
 
-    test('should return success message when tvshow remove successful', () async {
+    test('should return success message when tvshow remove successful',
+        () async {
       // arrange
       when(mockLocalDataSource.removeWatchlistTvShow(testTvShowTable))
           .thenAnswer((_) async => 'Removed from watchlist');
@@ -739,7 +752,8 @@ void main() {
       expect(result, const Right('Removed from watchlist'));
     });
 
-    test('should return DatabaseFailure when movie remove unsuccessful', () async {
+    test('should return DatabaseFailure when movie remove unsuccessful',
+        () async {
       // arrange
       when(mockLocalDataSource.removeWatchlist(testMovieTable))
           .thenThrow(DatabaseException('Failed to remove watchlist'));
@@ -749,7 +763,8 @@ void main() {
       expect(result, const Left(DatabaseFailure('Failed to remove watchlist')));
     });
 
-    test('should return DatabaseFailure when tvshow remove unsuccessful', () async {
+    test('should return DatabaseFailure when tvshow remove unsuccessful',
+        () async {
       // arrange
       when(mockLocalDataSource.removeWatchlistTvShow(testTvShowTable))
           .thenThrow(DatabaseException('Failed to remove watchlist'));

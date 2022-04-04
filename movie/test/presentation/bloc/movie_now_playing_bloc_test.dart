@@ -22,21 +22,20 @@ void main() {
   });
 
   blocTest<MovieNowPlayingBloc, MovieNowPlayingState>(
-    'should emit [Loading, HasData] when data is gotten successfully',
-    build: () {
-      when(usecase.execute()).thenAnswer((_) async => Right(testMovieList));
-      return movieNowPlayingBloc;
-    },
-    act: (bloc) => bloc.add(const OnMovieNowPlayingCalled()),
-    expect: () => [
-          MovieNowPlayingLoading(),
-          MovieNowPlayingHasData(testMovieList),
-        ],
-    verify: (bloc) {
-      verify(usecase.execute());
-      return const OnMovieNowPlayingCalled().props;
-    }
-  );
+      'should emit [Loading, HasData] when data is gotten successfully',
+      build: () {
+        when(usecase.execute()).thenAnswer((_) async => Right(testMovieList));
+        return movieNowPlayingBloc;
+      },
+      act: (bloc) => bloc.add(const OnMovieNowPlayingCalled()),
+      expect: () => [
+            MovieNowPlayingLoading(),
+            MovieNowPlayingHasData(testMovieList),
+          ],
+      verify: (bloc) {
+        verify(usecase.execute());
+        return const OnMovieNowPlayingCalled().props;
+      });
 
   blocTest<MovieNowPlayingBloc, MovieNowPlayingState>(
     'should emit [Loading, HasData] when get data is unsuccessful',

@@ -1,6 +1,5 @@
 import 'package:core/core.dart';
-import 'package:core/presentation/widgets/sub_heading_widget.dart';
-import 'package:core/utils/routes.dart';
+import 'package:core/presentation/sub_heading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/movie.dart';
@@ -29,6 +28,7 @@ class _MoviePageState extends State<MoviePage> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SingleChildScrollView(
+        key: const ValueKey('movie_page'),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -43,14 +43,28 @@ class _MoviePageState extends State<MoviePage> {
                   child: CircularProgressIndicator(),
                 );
               } else if (state is MovieNowPlayingHasData) {
-                return MovieList(state.result);
+                return MovieList(
+                  state.result,
+                  key: const ValueKey('now_playing_'),
+                );
+              } else if (state is MovieNowPlayingError) {
+                return const Text(
+                  'Failed',
+                  key: Key('error_message'),
+                );
               } else {
-                return const Text('Failed');
+                return const Center(
+                  child: Text(
+                    'There are no movies currently showing',
+                    key: Key('empty_message'),
+                  ),
+                );
               }
             }),
             buildSubHeading(
               title: 'Popular',
               onTap: () => Navigator.pushNamed(context, popularMovieRoute),
+              key: const ValueKey('see_more_popular'),
             ),
             BlocBuilder<MoviePopularBloc, MoviePopularState>(
                 builder: (context, state) {
@@ -59,14 +73,28 @@ class _MoviePageState extends State<MoviePage> {
                   child: CircularProgressIndicator(),
                 );
               } else if (state is MoviePopularHasData) {
-                return MovieList(state.result);
+                return MovieList(
+                  state.result,
+                  key: const ValueKey('popular_'),
+                );
+              } else if (state is MoviePopularError) {
+                return const Text(
+                  'Failed',
+                  key: Key('error_message'),
+                );
               } else {
-                return const Text('Failed');
+                return const Center(
+                  child: Text(
+                    'There are no popular movie showing',
+                    key: Key('empty_message'),
+                  ),
+                );
               }
             }),
             buildSubHeading(
               title: 'Top Rated',
               onTap: () => Navigator.pushNamed(context, topRatedMovieRoute),
+              key: const ValueKey('see_more_top_rated'),
             ),
             BlocBuilder<MovieTopRatedBloc, MovieTopRatedState>(
                 builder: (context, state) {
@@ -75,9 +103,22 @@ class _MoviePageState extends State<MoviePage> {
                   child: CircularProgressIndicator(),
                 );
               } else if (state is MovieTopRatedHasData) {
-                return MovieList(state.result);
+                return MovieList(
+                  state.result,
+                  key: const ValueKey('top_rated_'),
+                );
+              } else if (state is MovieTopRatedError) {
+                return const Text(
+                  'Failed',
+                  key: Key('error_message'),
+                );
               } else {
-                return const Text('Failed');
+                return const Center(
+                  child: Text(
+                    'There are no top rated movie showing',
+                    key: Key('empty_message'),
+                  ),
+                );
               }
             }),
           ],

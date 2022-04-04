@@ -33,7 +33,8 @@ void main() {
   });
 
   group(
-    'watchlist Movie', () {
+    'watchlist Movie',
+    () {
       blocTest<WatchlistMovieBloc, WatchlistMovieState>(
         'should emit [Loading, HasData] when watchlist data is gotten succesfully',
         build: () {
@@ -84,7 +85,8 @@ void main() {
   );
 
   group(
-    'watchlist Movie status', () {
+    'watchlist Movie status',
+    () {
       blocTest<WatchlistMovieBloc, WatchlistMovieState>(
         'get status should get true when the watchlist status is true',
         build: () {
@@ -161,8 +163,8 @@ void main() {
       blocTest<WatchlistMovieBloc, WatchlistMovieState>(
         'get status should update watchlist status when remove watchlist is success',
         build: () {
-          when(removeWatchlist.execute(testMovieDetail)).thenAnswer(
-              (_) async => const Right(watchlistRemoveMessage));
+          when(removeWatchlist.execute(testMovieDetail))
+              .thenAnswer((_) async => const Right(watchlistRemoveMessage));
           return watchlistMovieBloc;
         },
         act: (bloc) => bloc.add(RemoveMovieFromWatchlist(testMovieDetail)),

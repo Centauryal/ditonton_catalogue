@@ -11,7 +11,7 @@ class SSLPinning {
     securityContext.setTrustedCertificatesBytes(sslCert.buffer.asInt8List());
     HttpClient client = HttpClient(context: securityContext);
     client.badCertificateCallback = (cert, host, port) => false;
-    
+
     return IOClient(client);
   }
 }
