@@ -43,6 +43,7 @@ class _TvShowDetailPageState extends State<TvShowDetailPage> {
             : false);
     return Scaffold(
       body: BlocBuilder<TvShowDetailBloc, TvShowDetailState>(
+        key: const ValueKey('tv_show_detail_page'),
         builder: (context, state) {
           if (state is TvShowDetailLoading) {
             return const Center(
@@ -57,10 +58,16 @@ class _TvShowDetailPageState extends State<TvShowDetailPage> {
               ),
             );
           } else if (state is TvShowDetailError) {
-            return Text(state.message);
+            return Text(
+              state.message,
+              key: const Key('error_message'),
+            );
           } else {
             return const Center(
-              child: Text('Detail is empty'),
+              child: Text(
+                'Detail is empty',
+                key: Key('empty_message'),
+              ),
             );
           }
         },
@@ -69,6 +76,7 @@ class _TvShowDetailPageState extends State<TvShowDetailPage> {
   }
 }
 
+// ignore: must_be_immutable
 class DetailContent extends StatefulWidget {
   final TvShowDetail tvShow;
   bool isAddedWatchlist;
@@ -214,13 +222,17 @@ class _DetailContentState extends State<DetailContent> {
                             ),
                             BlocBuilder<TvShowRecommendationBloc,
                                 TvShowRecommendationState>(
+                              key: const ValueKey('recommendation_tv_show'),
                               builder: (context, state) {
                                 if (state is TvShowRecommendationLoading) {
                                   return const Center(
                                     child: CircularProgressIndicator(),
                                   );
                                 } else if (state is TvShowRecommendationError) {
-                                  return Text(state.message);
+                                  return Text(
+                                    state.message,
+                                    key: const Key('error_recommendation'),
+                                  );
                                 } else if (state
                                     is TvShowRecommendationHasData) {
                                   return SizedBox(
@@ -229,14 +241,17 @@ class _DetailContentState extends State<DetailContent> {
                                       scrollDirection: Axis.horizontal,
                                       itemBuilder: (context, index) {
                                         final tvShow = state.result[index];
-                                        return TvShowCardDetailList(
+                                        return TvShowCardRecommendationList(
+                                            index,
                                             tvShow: tvShow);
                                       },
                                       itemCount: state.result.length,
                                     ),
                                   );
                                 } else {
-                                  return Container();
+                                  return Container(
+                                    key: const Key('empty_recommendation'),
+                                  );
                                 }
                               },
                             ),

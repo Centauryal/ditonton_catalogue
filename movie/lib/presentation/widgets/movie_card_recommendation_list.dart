@@ -1,26 +1,29 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:core/domain/entities/tv_show.dart';
-import 'package:core/utils/routes.dart';
+import 'package:core/core.dart';
+import 'package:core/domain/entities/movie.dart';
 import 'package:flutter/material.dart';
 
-class TvShowCardDetailList extends StatelessWidget {
-  const TvShowCardDetailList({
+class MovieCardRecommendationList extends StatelessWidget {
+  const MovieCardRecommendationList(
+    this.index, {
     Key? key,
-    required this.tvShow,
+    required this.movie,
   }) : super(key: key);
 
-  final TvShow tvShow;
+  final Movie movie;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: InkWell(
+        key: Key('recommendation_$index'),
         onTap: () {
           Navigator.pushReplacementNamed(
             context,
-            tvShowDetailRoute,
-            arguments: tvShow.id,
+            movieDetailRoute,
+            arguments: movie.id,
           );
         },
         child: ClipRRect(
@@ -28,7 +31,7 @@ class TvShowCardDetailList extends StatelessWidget {
             Radius.circular(8),
           ),
           child: CachedNetworkImage(
-            imageUrl: 'https://image.tmdb.org/t/p/w500${tvShow.posterPath}',
+            imageUrl: '$baseImageUrl${movie.posterPath}',
             placeholder: (context, url) => const Center(
               child: CircularProgressIndicator(),
             ),

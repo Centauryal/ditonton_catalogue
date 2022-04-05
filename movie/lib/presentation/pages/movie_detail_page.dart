@@ -237,37 +237,9 @@ class _DetailContentState extends State<DetailContent> {
                                       scrollDirection: Axis.horizontal,
                                       itemBuilder: (context, index) {
                                         final movie = state.result[index];
-                                        return Padding(
-                                          padding: const EdgeInsets.all(4.0),
-                                          child: InkWell(
-                                            key: Key('recommendation_$index'),
-                                            onTap: () {
-                                              Navigator.pushReplacementNamed(
-                                                context,
-                                                movieDetailRoute,
-                                                arguments: movie.id,
-                                              );
-                                            },
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                Radius.circular(8),
-                                              ),
-                                              child: CachedNetworkImage(
-                                                imageUrl:
-                                                    '$baseImageUrl${movie.posterPath}',
-                                                placeholder: (context, url) =>
-                                                    const Center(
-                                                  child:
-                                                      CircularProgressIndicator(),
-                                                ),
-                                                errorWidget:
-                                                    (context, url, error) =>
-                                                        const Icon(Icons.error),
-                                              ),
-                                            ),
-                                          ),
-                                        );
+                                        return MovieCardRecommendationList(
+                                            index,
+                                            movie: movie);
                                       },
                                       itemCount: state.result.length,
                                     ),

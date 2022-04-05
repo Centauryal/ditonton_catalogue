@@ -15,3 +15,4 @@ export 'presentation/pages/movie_page.dart';
 export 'presentation/pages/popular_movies_page.dart';
 export 'presentation/pages/top_rated_movies_page.dart';
 export 'presentation/widgets/movie_card_list.dart';
+export 'presentation/widgets/movie_card_recommendation_list.dart';

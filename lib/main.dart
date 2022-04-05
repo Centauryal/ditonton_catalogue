@@ -88,7 +88,7 @@ class MyApp extends StatelessWidget {
               return CupertinoPageRoute(builder: (_) => PopularTvShowsPage());
             case topRatedMovieRoute:
               return CupertinoPageRoute(builder: (_) => TopRatedMoviesPage());
-            case topRatedTvShowwRoute:
+            case topRatedTvShowRoute:
               return CupertinoPageRoute(builder: (_) => TopRatedTvShowsPage());
             case movieDetailRoute:
               final id = settings.arguments as int;

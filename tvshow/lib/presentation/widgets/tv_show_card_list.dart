@@ -1,13 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
 import 'package:core/domain/entities/tv_show.dart';
-import 'package:core/utils/routes.dart';
 import 'package:flutter/material.dart';
 
 class TvShowCard extends StatelessWidget {
   final TvShow tvShow;
 
-  TvShowCard(this.tvShow);
+  const TvShowCard(this.tvShow, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -5,7 +5,7 @@ import 'package:tvshow/presentation/widgets/tv_show_list.dart';
 import 'package:tvshow/tvshow.dart';
 
 class TvShowPage extends StatefulWidget {
-  TvShowPage({Key? key}) : super(key: key);
+  const TvShowPage({Key? key}) : super(key: key);
 
   @override
   State<TvShowPage> createState() => _TvShowPageState();
@@ -24,74 +24,122 @@ class _TvShowPageState extends State<TvShowPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('TV Series'),
-        actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, searchRoute, arguments: true);
-              },
-              icon: const Icon(Icons.search))
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Now Playing',
-                style: kHeading6,
-              ),
-              BlocBuilder<TvShowOnAirBloc, TvShowOnAirState>(
-                  builder: (context, state) {
-                if (state is TvShowOnAirLoading) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state is TvShowOnAirHasData) {
-                  return TvShowList(state.result);
-                } else {
-                  return const Text('Failed');
-                }
-              }),
-              buildSubHeading(
-                title: 'Popular',
-                onTap: () => Navigator.pushNamed(context, popularTvShowRoute),
-                key: const ValueKey('see_more_popular'),
-              ),
-              BlocBuilder<TvShowPopularBloc, TvShowPopularState>(
-                  builder: (context, state) {
-                if (state is TvShowPopularLoading) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state is TvShowPopularHasData) {
-                  return TvShowList(state.result);
-                } else {
-                  return const Text('Failed');
-                }
-              }),
-              buildSubHeading(
-                title: 'Top Rated',
-                onTap: () => Navigator.pushNamed(context, topRatedTvShowwRoute),
-                key: const ValueKey('see_more_top_rated'),
-              ),
-              BlocBuilder<TvShowTopRatedBloc, TvShowTopRatedState>(
-                  builder: (context, state) {
-                if (state is TvShowTopRatedLoading) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state is TvShowTopRatedHasData) {
-                  return TvShowList(state.result);
-                } else {
-                  return const Text('Failed');
-                }
-              }),
+    return Material(
+      child: CustomDrawer(
+        routes: tvShowRoute,
+        content: Scaffold(
+          appBar: AppBar(
+            title: const Text('TV Series'),
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, searchRoute, arguments: true);
+                  },
+                  icon: const Icon(Icons.search))
             ],
+          ),
+          body: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SingleChildScrollView(
+              key: const ValueKey('tv_show_page'),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Now Playing',
+                    style: kHeading6,
+                  ),
+                  BlocBuilder<TvShowOnAirBloc, TvShowOnAirState>(
+                      builder: (context, state) {
+                    if (state is TvShowOnAirLoading) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (state is TvShowOnAirHasData) {
+                      return TvShowList(
+                        state.result,
+                        valueKey: 'on_air_',
+                      );
+                    } else if (state is TvShowOnAirError) {
+                      return const Text(
+                        'Failed',
+                        key: Key('error_message'),
+                      );
+                    } else {
+                      return const Center(
+                        child: Text(
+                          'There are no tvshows currently showing',
+                          key: Key('empty_message'),
+                        ),
+                      );
+                    }
+                  }),
+                  buildSubHeading(
+                    title: 'Popular',
+                    onTap: () =>
+                        Navigator.pushNamed(context, popularTvShowRoute),
+                    key: const ValueKey('see_more_popular'),
+                  ),
+                  BlocBuilder<TvShowPopularBloc, TvShowPopularState>(
+                      builder: (context, state) {
+                    if (state is TvShowPopularLoading) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (state is TvShowPopularHasData) {
+                      return TvShowList(
+                        state.result,
+                        valueKey: 'popular_',
+                      );
+                    } else if (state is TvShowPopularError) {
+                      return const Text(
+                        'Failed',
+                        key: Key('error_message'),
+                      );
+                    } else {
+                      return const Center(
+                        child: Text(
+                          'There are no tvshows currently showing',
+                          key: Key('empty_message'),
+                        ),
+                      );
+                    }
+                  }),
+                  buildSubHeading(
+                    title: 'Top Rated',
+                    onTap: () =>
+                        Navigator.pushNamed(context, topRatedTvShowRoute),
+                    key: const ValueKey('see_more_top_rated'),
+                  ),
+                  BlocBuilder<TvShowTopRatedBloc, TvShowTopRatedState>(
+                      builder: (context, state) {
+                    if (state is TvShowTopRatedLoading) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (state is TvShowTopRatedHasData) {
+                      return TvShowList(
+                        state.result,
+                        valueKey: 'top_rated_',
+                      );
+                    }
+                    if (state is TvShowTopRatedError) {
+                      return const Text(
+                        'Failed',
+                        key: Key('error_message'),
+                      );
+                    } else {
+                      return const Center(
+                        child: Text(
+                          'There are no tvshows currently showing',
+                          key: Key('empty_message'),
+                        ),
+                      );
+                    }
+                  }),
+                ],
+              ),
+            ),
           ),
         ),
       ),

@@ -26,8 +26,9 @@ class _TopRatedTvShowsPageState extends State<TopRatedTvShowsPage> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: BlocBuilder<TvShowTopRatedBloc, TvShowTopRatedState>(
+          key: const ValueKey('top_rated_tv_shows_page'),
           builder: (context, state) {
-            if (state is TvShowPopularLoading) {
+            if (state is TvShowTopRatedLoading) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
@@ -35,18 +36,24 @@ class _TopRatedTvShowsPageState extends State<TopRatedTvShowsPage> {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final tvShow = state.result[index];
-                  return TvShowCard(tvShow);
+                  return TvShowCard(
+                    tvShow,
+                    key: Key('tv_show_card_$index'),
+                  );
                 },
                 itemCount: state.result.length,
               );
             } else if (state is TvShowTopRatedError) {
               return Center(
-                key: const Key('error_message'),
                 child: Text(state.message),
+                key: const Key('error_message'),
               );
             } else {
-              return Expanded(
-                child: Container(),
+              return const Center(
+                child: Text(
+                  'There are no one top rated tv show',
+                  key: Key('empty_data'),
+                ),
               );
             }
           },

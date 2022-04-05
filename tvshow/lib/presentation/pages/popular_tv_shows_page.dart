@@ -26,6 +26,7 @@ class _PopularTvShowsPageState extends State<PopularTvShowsPage> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: BlocBuilder<TvShowPopularBloc, TvShowPopularState>(
+          key: const ValueKey('popular_tv_shows_page'),
           builder: (context, state) {
             if (state is TvShowPopularLoading) {
               return const Center(
@@ -35,18 +36,21 @@ class _PopularTvShowsPageState extends State<PopularTvShowsPage> {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final tvShow = state.result[index];
-                  return TvShowCard(tvShow);
+                  return TvShowCard(tvShow, key: Key('tv_show_card_$index'));
                 },
                 itemCount: state.result.length,
               );
             } else if (state is TvShowPopularError) {
               return Center(
-                key: const Key('error_message'),
                 child: Text(state.message),
+                key: const Key('error_message'),
               );
             } else {
-              return Expanded(
-                child: Container(),
+              return const Center(
+                child: Text(
+                  'There are no one popular tv show',
+                  key: Key('empty_data'),
+                ),
               );
             }
           },

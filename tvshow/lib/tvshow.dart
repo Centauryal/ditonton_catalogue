@@ -14,5 +14,5 @@ export 'presentation/pages/popular_tv_shows_page.dart';
 export 'presentation/pages/top_rated_tv_shows_page.dart';
 export 'presentation/pages/tv_show_detail_page.dart';
 export 'presentation/pages/tv_show_page.dart';
-export 'presentation/widgets/tv_show_card_detail_list.dart';
 export 'presentation/widgets/tv_show_card_list.dart';
+export 'presentation/widgets/tv_show_card_recommendation_list.dart';
