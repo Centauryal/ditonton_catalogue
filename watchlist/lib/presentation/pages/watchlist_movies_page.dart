@@ -40,29 +40,38 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Watchlist'),
-        bottom: TabBar(
-          controller: _tabController,
-          tabs: const [
-            Tab(
-              icon: Icon(Icons.movie),
-              text: 'Movie',
+    return Material(
+      child: CustomDrawer(
+        routes: watchlistRoute,
+        content: Scaffold(
+          appBar: AppBar(
+            leading: const Icon(Icons.menu),
+            title: const Text('Watchlist'),
+            bottom: TabBar(
+              controller: _tabController,
+              tabs: const [
+                Tab(
+                  key: ValueKey('tab_movie'),
+                  icon: Icon(Icons.movie),
+                  text: 'Movie',
+                ),
+                Tab(
+                  key: ValueKey('tab_tv_show'),
+                  icon: Icon(Icons.tv),
+                  text: 'TV Series',
+                )
+              ],
             ),
-            Tab(
-              icon: Icon(Icons.tv),
-              text: 'TV Series',
-            )
-          ],
+          ),
+          body: TabBarView(
+            key: const ValueKey('watchlist_page'),
+            controller: _tabController,
+            children: [
+              _itemMovieWatchlist(context),
+              _itemTvShowWatchlist(context),
+            ],
+          ),
         ),
-      ),
-      body: TabBarView(
-        controller: _tabController,
-        children: [
-          _itemMovieWatchlist(context),
-          _itemTvShowWatchlist(context),
-        ],
       ),
     );
   }
@@ -80,7 +89,10 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
             return ListView.builder(
               itemBuilder: (context, index) {
                 final movie = state.result[index];
-                return MovieCard(movie);
+                return MovieCard(
+                  movie,
+                  key: Key('movie_card_$index'),
+                );
               },
               itemCount: state.result.length,
             );
@@ -90,8 +102,8 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
               child: Text(state.message),
             );
           } else {
-            return const Center(
-              child: Text(''),
+            return Container(
+              key: const Key('empty_data'),
             );
           }
         },
@@ -112,7 +124,10 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
             return ListView.builder(
               itemBuilder: (context, index) {
                 final tvShow = state.result[index];
-                return TvShowCard(tvShow);
+                return TvShowCard(
+                  tvShow,
+                  key: Key('tv_show_card_$index')
+                );
               },
               itemCount: state.result.length,
             );
@@ -122,8 +137,8 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
               child: Text(state.message),
             );
           } else {
-            return const Center(
-              child: Text(''),
+            return Container(
+              key: const Key('empty_data'),
             );
           }
         },
