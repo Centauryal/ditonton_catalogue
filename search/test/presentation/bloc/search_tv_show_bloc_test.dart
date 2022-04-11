@@ -5,8 +5,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:search/domain/usecases/search_tv_show.dart';
-import 'package:search/presentation/bloc/search_tv_show_bloc.dart';
+import 'package:search/search.dart';
 
 import '../../dummy_data/mock_data.dart';
 import 'search_tv_show_bloc_test.mocks.dart';
@@ -36,7 +35,7 @@ void main() {
             .thenAnswer((_) async => Right(tTvShowList));
         return searchTvShowBloc;
       },
-      act: (bloc) => bloc.add(const OnQueryChangedTvShow(tTvShowQuery)),
+      act: (bloc) => bloc.add(OnQueryChangedTvShow(tTvShowQuery)),
       wait: const Duration(milliseconds: 500),
       expect: () => [
         SearchTvShowLoading(),
@@ -44,17 +43,18 @@ void main() {
       ],
       verify: (bloc) {
         verify(mockSearchTvShow.execute(tTvShowQuery));
+        return OnQueryChangedTvShow(tTvShowQuery).props;
       },
     );
 
     blocTest<SearchTvShowBloc, SearchTvShowState>(
       'Should emit [Loading, Error] when get search is unsuccessful',
       build: () {
-        when(mockSearchTvShow.execute(tTvShowQuery))
-            .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+        when(mockSearchTvShow.execute(tTvShowQuery)).thenAnswer(
+            (_) async => const Left(ServerFailure('Server Failure')));
         return searchTvShowBloc;
       },
-      act: (bloc) => bloc.add(const OnQueryChangedTvShow(tTvShowQuery)),
+      act: (bloc) => bloc.add(OnQueryChangedTvShow(tTvShowQuery)),
       wait: const Duration(milliseconds: 500),
       expect: () => [
         SearchTvShowLoading(),
@@ -62,7 +62,24 @@ void main() {
       ],
       verify: (bloc) {
         verify(mockSearchTvShow.execute(tTvShowQuery));
+        return SearchTvShowLoading().props;
       },
+    );
+
+    blocTest<SearchTvShowBloc, SearchTvShowState>(
+      'should emit [empty] when get search is empty',
+      build: () {
+        when(mockSearchTvShow.execute(tTvShowQuery))
+            .thenAnswer((_) async => const Right([]));
+        return searchTvShowBloc;
+      },
+      act: (bloc) => bloc.add(OnQueryChangedTvShow(tTvShowQuery)),
+      wait: const Duration(milliseconds: 500),
+      expect: () => [
+        SearchTvShowLoading(),
+        const SearchTvShowHasData([])
+      ],
+      verify: (bloc) => verify(mockSearchTvShow.execute(tTvShowQuery)),
     );
   });
 }

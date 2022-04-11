@@ -18,11 +18,15 @@ class SearchPage extends StatelessWidget {
         title: Text(isTvShow ? 'Search TV Series' : 'Search Movies'),
       ),
       body: Padding(
+        key: const ValueKey('search_page'),
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
+              key: isTvShow
+                  ? const ValueKey('tv_show_text_field')
+                  : const ValueKey('movie_text_field'),
               onChanged: (query) {
                 isTvShow
                     ? context
@@ -56,7 +60,10 @@ class SearchPage extends StatelessWidget {
                             padding: const EdgeInsets.all(8),
                             itemBuilder: (context, index) {
                               final tvShow = result[index];
-                              return TvShowCard(tvShow);
+                              return TvShowCard(
+                                tvShow,
+                                key: Key('tv_show_card_$index'),
+                              );
                             },
                             itemCount: result.length,
                           ),
@@ -64,12 +71,18 @@ class SearchPage extends StatelessWidget {
                       } else if (state is SearchTvShowError) {
                         return Expanded(
                           child: Center(
-                            child: Text(state.message),
+                            child: Text(
+                              state.message,
+                              key: const Key('error_message'),
+                            ),
                           ),
                         );
                       } else {
-                        return Expanded(
-                          child: Container(),
+                        return const Expanded(
+                          child: Text(
+                            'Yah, Film yang kamu cari gak ada',
+                            key: Key('empty_data'),
+                          ),
                         );
                       }
                     },
@@ -87,7 +100,10 @@ class SearchPage extends StatelessWidget {
                             padding: const EdgeInsets.all(8),
                             itemBuilder: (context, index) {
                               final movie = result[index];
-                              return MovieCard(movie);
+                              return MovieCard(
+                                movie,
+                                key: Key('movie_card_$index'),
+                              );
                             },
                             itemCount: result.length,
                           ),
@@ -95,12 +111,18 @@ class SearchPage extends StatelessWidget {
                       } else if (state is SearchError) {
                         return Expanded(
                           child: Center(
-                            child: Text(state.message),
+                            child: Text(
+                              state.message,
+                              key: const Key('error_message'),
+                            ),
                           ),
                         );
                       } else {
-                        return Expanded(
-                          child: Container(),
+                        return const Expanded(
+                          child: Text(
+                            'Yah, Film yang kamu cari gak ada',
+                            key: Key('empty_data'),
+                          ),
                         );
                       }
                     },
